@@ -1,11 +1,10 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def home(request):
-    mensagem = "<h1>bem-vindo ao DevBlog</h1> <p>Em breve arquivos aqui.</p>"
 
-    return HttpResponse(mensagem)
+    return render(request, 'blog/index.html')
 
 def sobre(request):
-    mensagem = "<h1><strong>Sobre o DevBlog</strong></h1> <p><em>testes <br>gostosos</em> 😍</p> "
 
-    return HttpResponse(mensagem)
+    return render(request,'blog/sobre.html')
