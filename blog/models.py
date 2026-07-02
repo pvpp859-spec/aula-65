@@ -14,7 +14,7 @@ class Artigo(models.Model):
 
     conteudo = models.TextField()
 
-    data_publicaçao = models.DateTimeField(auto_now_add=True)
+    data_publicacao = models.DateTimeField(auto_now_add=True)
 
     Categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)
 

@@ -15,11 +15,23 @@
         <div class = "container">
             <a class = "navbar-brand" href="{% url 'home' %}">❤️ Devblog</a>
             <div class="collapse navbar-collapse">
-            <ul class= "navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}"> inicio</a>
-                    <a class="nav-link" href="{% url 'sobre' %}"> sobre</a>
-                </li>
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">inicio</a>
+                    </li>
+                    
+                    <!-- O LAÇO ENTRA EXATAMENTE AQUI -->
+                    {% for categoria in lista_categorias %}
+    <li class="nav-item">
+        <!-- Mudamos o href para chamar a rota passando o id da categoria -->
+        <a class="nav-link" href="{% url 'categoria' categoria.id %}">{{ categoria.nome }}</a>
+    </li>
+    {% endfor %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sobre' %}">sobre</a>
+                    </li>
+                </ul>
             </ul>
             </div>
         </div>

@@ -2,7 +2,26 @@
 
 {% block content %}
 
-    <h3>Ultimas Noticias de Tecnologia</h3>
-    <p>Bem-Vindo ao DevBlog !</p>
+    <h3 class="mb-4">Ultimas Noticias de Tecnologia</h3>
 
-{% endblock %}    
+    <!-- Corrigido para 'lista_artigos' com S, igualzinho está na sua views.py -->
+    {% for artigo in lista_artigos %}
+
+        <div class="card mb-3 shadow-sm"> <!-- Corrigido para shadow-sm -->
+            <div class="card-body">
+                <h3 class="card-title text-success">{{ artigo.titulo }}</h3>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    Categoria: {{ artigo.Categoria.nome }} | Autor: {{ artigo.autor }}
+                </h6>
+                <p class="card-text">{{ artigo.conteudo }}</p>
+                <p class="card-text">
+                    <small class="text-muted">Publicado em: {{ artigo.data_publicacao }}</small>
+                </p>
+            </div>
+        </div>
+
+    {% empty %}
+        <p>Nenhuma noticia publicada ainda.</p>
+    {% endfor %}
+
+{% endblock %}
