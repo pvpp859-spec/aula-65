@@ -17,6 +17,15 @@ class Artigo(models.Model):
     data_publicacao = models.DateTimeField(auto_now_add=True)
 
     Categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)
-
     def __str__(self):
         return self.titulo
+
+class MensagemContato(models.Model):
+    nome = models.CharField(max_length=100)
+
+    email = models.EmailField()
+    mensagem = models.TextField()
+    data_envio = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"mensagem de {self.nome}"
