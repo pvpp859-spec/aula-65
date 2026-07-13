@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Artigo, Categoria
 from .forms import ContatoForm
@@ -6,13 +7,21 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import ArtigoSerializer
 
+
 def home(request):
-    noticias = Artigo.objects.all()
-    todas_categorias = Categoria.objects.all() 
-    
+    noticias = Artigo.objects.all().order_by('-id')
+    busca = request.GET.get('q')
+
+    if busca:
+        noticias = noticias.filter(titulo__icontains=busca)
+
+    # Movemos o Paginator para fora do 'if' para garantir que ele sempre exista
+    paginator = Paginator(noticias, 5) 
+    numero_da_pagina = request.GET.get('page')
+    page_obj = paginator.get_page(numero_da_pagina)
+
     contexto = {
-        'lista_artigos': noticias,
-        'lista_categorias': todas_categorias 
+        'lista_artigos': page_obj,
     }
     return render(request, 'blog/index.html', contexto)
 

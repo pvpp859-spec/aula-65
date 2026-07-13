@@ -5,9 +5,28 @@
     <h3 class="mb-4">Ultimas Noticias de Tecnologia</h3>
 
     <!-- Corrigido para 'lista_artigos' com S, igualzinho está na sua views.py -->
+
+    <div class="pagination justify-content-center mt-4">
+        {% if lista_artigos.has_previous %}
+            <a href="?page=1" class="btn btn-outline-primary btn-sm mx-1">&laquo; Primeira</a>
+            <a href="?page={{ lista_artigos.previous_page_number }}" class="btn btn-outline-primary btn-sm mx-1">Anterior</a>
+        {% endif %}
+    
+        <span class="current fw-bold mx-3 mt-1">
+            Página {{ lista_artigos.number }} de {{ lista_artigos.paginator.num_pages }}.
+        </span>
+    
+        {% if lista_artigos.has_next %}
+            <a href="?page={{ lista_artigos.next_page_number }}" class="btn btn-outline-primary btn-sm mx-1">Próxima</a>
+            <a href="?page={{ lista_artigos.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mx-1">Última &raquo;</a>
+        {% endif %}
+    </div>
     {% for artigo in lista_artigos %}
 
         <div class="card mb-3 shadow-sm"> <!-- Corrigido para shadow-sm -->
+            {% if artigo.imagem %}
+                <img src="{{artigo.imagem.url}}" class="card-img-top" alt="{{artigo.titulo}}">
+            {% endif %}
             <div class="card-body">
                 <h3 class="card-title text-success">{{ artigo.titulo }}</h3>
                 <h6 class="card-subtitle mb-2 text-muted">

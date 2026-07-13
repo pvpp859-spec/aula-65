@@ -13,6 +13,7 @@ class Artigo(models.Model):
     autor = models.CharField(max_length=50,default="Admin")
 
     conteudo = models.TextField()
+    imagem = models.ImageField(upload_to='artigos/',blank=True,null=True)
 
     data_publicacao = models.DateTimeField(auto_now_add=True)
 
